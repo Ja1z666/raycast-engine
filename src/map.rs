@@ -3,7 +3,7 @@ use sfml::{
     system::Vector2f,
 };
 
-use crate::TILE_SIZE;
+use crate::{player::Player, TILE_SIZE};
 
 pub struct Map;
 
@@ -25,10 +25,7 @@ impl Map {
         ]
     }
 
-    pub fn fill_map(
-        map: &[[i32; 16]; 12],
-        player_entity: &mut RectangleShape,
-    ) -> Vec<RectangleShape<'static>> {
+    pub fn fill_map(map: &[[i32; 16]; 12], player: &mut Player) -> Vec<RectangleShape<'static>> {
         let mut map_obj: Vec<RectangleShape> = Vec::new();
 
         for i in 0..12 {
@@ -40,7 +37,7 @@ impl Map {
                     box_obj.set_position(Vector2f::new(j as f32 * TILE_SIZE, i as f32 * TILE_SIZE));
                     map_obj.push(box_obj);
                 } else if map[i][j] == 2 {
-                    player_entity.set_position(Vector2f::new(
+                    player.set_position(Vector2f::new(
                         j as f32 * TILE_SIZE + (TILE_SIZE / 2.),
                         i as f32 * TILE_SIZE + (TILE_SIZE / 2.),
                     ));
