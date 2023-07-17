@@ -3,20 +3,19 @@ use sfml::{
     system::{Clock, Vector2f},
     window::{Event, Key, Style},
 };
-use std::f32::consts::PI;
 
 mod map;
 mod player;
 mod utilities;
 
 use map::Map;
-use player::{Moving, Player};
+use player::{Moving, Player, Ray};
 use utilities::fps;
 
 const WIDTH: u32 = 800;
 const HEIGHT: u32 = 600;
 
-const TILE_SIZE: f32 = 5.;
+const TILE_SIZE: f32 = 32.;
 
 fn main() {
     let mut window = RenderWindow::new(
@@ -35,8 +34,8 @@ fn main() {
 
     let mut player = Player {
         speed: 5.,
-        position: Vector2f::new(0., 0.),
-        rays: [0.; WIDTH as usize],
+        position: Vector2f::new(2. * TILE_SIZE, 2. * TILE_SIZE),
+        rays: [Ray::new(); WIDTH as usize],
         moving: Moving {
             forward: false,
             backward: false,
@@ -47,7 +46,6 @@ fn main() {
     };
 
     let map = Map::new();
-    let map_obj = Map::fill_map(&map, &mut player);
 
     loop {
         fps(&mut window, &mut frame_count, &mut clock_fps);
@@ -75,7 +73,6 @@ fn main() {
 
             player.update(&mut clock, &map, &mut window);
             player.draw_screen(&mut window);
-            player.draw_map(&map_obj, &mut window);
 
             window.display();
         }

@@ -1,3 +1,5 @@
+use std::f32::consts::PI;
+
 use sfml::{graphics::RenderWindow, system::Clock};
 
 pub fn fps(window: &mut RenderWindow, frame_count: &mut i32, clock: &mut Clock) {
@@ -17,4 +19,8 @@ fn fmod(x: f32, y: f32) -> f32 {
 
 pub fn get_degrees(degrees: f32) -> f32 {
     fmod(360. + fmod(degrees, 360.), 360.)
+}
+
+pub fn deg_to_rad(degrees: f32) -> f32 {
+    PI * degrees / 180.
 }
