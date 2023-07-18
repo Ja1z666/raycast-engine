@@ -12,8 +12,8 @@ use map::Map;
 use player::{Moving, Player, Ray};
 use utilities::fps;
 
-const WIDTH: u32 = 1200;
-const HEIGHT: u32 = 900;
+const WIDTH: u32 = 800;
+const HEIGHT: u32 = 600;
 
 const TILE_SIZE: f32 = 32.;
 
